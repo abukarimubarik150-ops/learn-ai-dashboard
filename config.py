@@ -225,6 +225,12 @@ import os
 APP_NAME = "LEARN-AI Mobile"
 APP_ICON = "📱"
 
-# Replace 'YOUR_GEMINI_API_KEY_HERE' with your actual key from Google AI Studio
-GEMINI_API_KEY = os.getenv("")
+import streamlit as st
+import os
 
+# 1. First, check Streamlit Cloud's secure Secrets (for the live app)
+if "GEMINI_API_KEY" in st.secrets:
+    GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
+# 2. Fallback to environment variables (for local development)
+else:
+    GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
